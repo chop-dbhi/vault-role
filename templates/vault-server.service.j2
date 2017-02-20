@@ -2,13 +2,13 @@
 Description=Manage the vault server
 Requires=network-online.target
 After=network-online.target
-
+KillMode=control-group
 [Service]
 Restart=on-failure
 {% if vault_server_mode == 'development' %}
-ExecStart=/usr/bin/vault server -dev
+    ExecStart=/usr/bin/vault server -dev
 {% else %}
-ExecStart=/usr/bin/vault server -config={{ vault_server_config_path }}
+    ExecStart=/bin/sh -c  '/usr/bin/vault server -log-level={{vault_server_log_level}} -config={{ vault_server_config_path }} 1>{{vault_server_log_dir}}/vault.log 2>{{vault_server_log_dir}}/vault.err'
 {% endif %}
 
 [Install]
