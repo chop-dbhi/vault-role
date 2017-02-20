@@ -1,0 +1,10 @@
+backend "file" {
+  path = "{{ vault_dir }}/data"
+}
+
+listener "tcp" {
+  address = "0.0.0.0:8200"
+  tls_disable = 0
+  tls_cert_file = "{{ vault_dir }}/bundle.crt"
+  tls_key_file = "{{ vault_dir }}/star.research.chop.edu.key"
+}
