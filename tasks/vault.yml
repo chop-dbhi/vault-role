@@ -1,0 +1,15 @@
+
+
+- name: Include specific Vault
+  include: vault-debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Include specific Vault on RedHat
+  include: vault-redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Include configuration templates
+  include: vault-config.yml
+
+- name: Restart Vault
+  include: handlers/main.yml

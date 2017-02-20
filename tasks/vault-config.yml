@@ -1,0 +1,11 @@
+---
+
+- name: Copy Vault configuration templates
+  template:
+    src: "templates/vault-configuration.j2"
+    dest: "{{ vault_dir }}/config.hcl"
+    owner: "{{ vault_user }}"
+    group: "{{ vault_group }}"
+  tags:
+    - configuration
+  when: vault_apply_config | bool
